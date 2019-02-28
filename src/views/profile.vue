@@ -1,0 +1,54 @@
+<template>
+  <div class="mdc-layout-grid">
+    <div class="mdc-layout-grid__inner">
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+        <h1>Профиль</h1>
+        <h4 v-if="user">{{ user.email }}</h4>
+        <hr/>
+        <form>
+            <h5>Изменить пароль</h5>
+        </form>
+        <hr/>
+        <mdc-button :loding="loading" @click="doLogout">
+          Выйти
+        </mdc-button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+  import { mapState } from 'vuex'
+  import router from '@/router'
+  import { auth } from '@/config'
+  import MdcButton from '@/components/mdc/button'
+
+  const data = function () {
+    return {
+      loading: false,
+      error: 0
+    }
+  }
+
+  const computed = {
+    ...mapState(['user', 'vehicles'])
+  }
+
+  const methods = {
+    async doLogout () {
+      this.loading = true
+      await auth.signOut()
+      this.loading = false
+      router.push('/')
+      this.$store.dispatch('userLogout')
+    }
+  }
+
+  export default {
+    components: { MdcButton },
+    name: 'Profile',
+    data,
+    computed,
+    methods
+  }
+</script>
