@@ -148,6 +148,11 @@
     font-size: 2.5rem;
     line-height: 2.5rem;
   }
+  h2 {
+    @include mdc-typography(headline2);
+    font-size: 2rem;
+    line-height: 2rem;
+  }
   p {
     @include mdc-typography(body1);
   }
