@@ -39,4 +39,11 @@
 <style lang="scss">
   @import "@/assets/style.scss";
   @import "~@material/button/mdc-button";
+
+  @media (max-width: 600px) {
+    .form-button .mdc-button {
+      padding: 15px 20px;
+      height: auto;
+    }
+  }
 </style>
