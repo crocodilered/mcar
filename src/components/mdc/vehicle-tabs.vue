@@ -7,7 +7,7 @@
           <button @click="switchTab('expense')" class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="1">
             <span class="mdc-tab__content">
               <span class="mdc-tab__icon material-icons" aria-hidden="true">add</span>
-              <span class="mdc-tab__text-label">Добавить</span>
+              <span class="mdc-tab__text-label">Затрата</span>
             </span>
             <span class="mdc-tab-indicator mdc-tab-indicator--active">
               <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
@@ -96,15 +96,16 @@
   @import "~@material/tab/mdc-tab";
 
   .mdc-tab-bar--upper {
-    background-color: $mdc-theme-primary;
+    background-color: $mdc-theme-primary-light;
 
     .mdc-tab__icon, 
     .mdc-tab__text-label {
-      color: $mdc-theme-on-primary ! important;
+      color: $mdc-theme-on-primary-light ! important;
     }
 
     .mdc-tab-indicator > .mdc-tab-indicator__content--underline {
-      background-color: $mdc-theme-on-primary ! important;
+      background-color: $mdc-theme-secondary ! important;
+      height: 4px;
     }
   }
 
