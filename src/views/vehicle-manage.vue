@@ -20,7 +20,9 @@
           v-if="vehicleManageTab === 'notes'"
           class="tab"
         >
-          NOTES
+          <vehicle-notes
+            :vehicle="currentVehicle"
+          />
         </div>
       </div>
     </div>
@@ -31,20 +33,24 @@
   import { mapState } from 'vuex'
   import VehicleExpense from '@/components/vehicle/vehicle-expense'
   import VehicleReport from '@/components/vehicle/vehicle-report'
-
-  const computed = {
-    ...mapState([
-      'currentVehicle',
-      'vehicleManageTab'
-    ])
-  }
+  import VehicleNotes from '@/components/vehicle/vehicle-notes'
 
   export default {
-    components: { VehicleExpense, VehicleReport },
-    computed,
+    components: {
+      VehicleExpense,
+      VehicleReport,
+      VehicleNotes
+    },
+    
+    computed: {
+      ...mapState([
+        'currentVehicle',
+        'vehicleManageTab'
+      ])
+    },
 
     async created () {
-      this.$store.commit('setVehicleManageTab', 'expense')
+      this.$store.commit('setVehicleManageTab', 'notes')
     },
 
     destroyed () {
@@ -52,9 +58,3 @@
     }
   }
 </script>
-
-<style lang="scss">
-  .tab {
-    margin-top: 2em;
-  }
-</style>
