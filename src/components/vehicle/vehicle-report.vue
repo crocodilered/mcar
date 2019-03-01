@@ -53,17 +53,14 @@
      * Load available years from database.
      */
     async loadAvailableYearsList () {
-      const ref = firestore
-        .collection('users').doc(this.$store.state.user.uid)
-        .collection('vehicles').doc(this.vehicle.id)
+      const snapshot = await this.vehicleRef
         .collection('expensesAggregatedYearly')
-      const snapshot = await ref.get()
-      this.availableYearsList = (snapshot.empty)
-        ? []
+        .get()
+      this.availableYearsList = snapshot.empty
+        ? null
         : snapshot.docs
           .map(doc => doc.data().date.toDate().getFullYear())
           .reverse()
-      this.year = this.availableYearsList.length > 0 ? this.availableYearsList[0] : 0
     },
 
     /**
@@ -75,17 +72,13 @@
         const dateFrom = new Date((new Date(this.year, 0)).getTime() - 1)
         const dateTo = new Date(this.year + 1, 0)
 
-        this.loading = true
-        const querySnapshot = await firestore
-          .collection('users').doc(this.$store.state.user.uid)
-          .collection('vehicles').doc(this.vehicle.id)
+        const snapshot = await this.vehicleRef
           .collection('expensesAggregatedMonthly')
           .where('date', '>', dateFrom)
           .where('date', '<', dateTo)
           .get()
-        this.loading = false
 
-        querySnapshot.forEach(doc => {
+        snapshot.forEach(doc => {
           const data = doc.data()
           for (let key in data) {
             if (key !== 'date') {
@@ -108,12 +101,23 @@
     watch,
     methods,
 
+    computed: {
+      vehicleRef () {
+        return firestore
+          .collection('users').doc(this.$store.state.user.uid)
+          .collection('vehicles').doc(this.vehicle.id)
+      }
+    },
+
     async created () {
+      // here loading flag is true
       if (this.vehicle) {
         await this.loadAvailableYearsList()
-        if (this.year) {
-          this.loadReport()
+        if (this.availableYearsList) {
+          this.year = this.availableYearsList[0]
+          await this.loadReport()
         }
+        this.loading = false
       }
     }
   }
