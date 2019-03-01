@@ -8,11 +8,19 @@
 
 <script>
   import Highcharts from 'highcharts'
+  import HighchartsDrilldown from 'highcharts/modules/drilldown'
   import ExpenseModel from '@/models/expense-model'
 
   export default {
     name: 'Chart',
     props: ['report'],
+
+    data () {
+      return {
+        data: null,
+        drilldown: null
+      }
+    },
 
     methods: {
       // Lookup expense type label by value
@@ -28,36 +36,72 @@
         return this.expenseTypeLookup[num]
       },
 
-      // Render chart
-      render () {
-        if (!this.report) return
-        const chartData = []
+      prepareData () {
+        this.data = []
         for (let key in this.report.amounts) {
-          chartData.push({
+          this.data.push({
             name: this.getExpenseTypeName(key),
+            drilldown: this.getExpenseTypeName(key),
             y: this.report.amounts[key]
           })
         }
 
+        this.drilldown = [
+          {
+            name: 'Обслуживание',
+            id: 'Обслуживание',
+            data: [
+              ['1.1.213', 1, 2], ['2.1.213', 2], ['3.1.213', 3],
+              ['4.1.213', 1], ['5.1.213', 2], ['6.1.213', 3],
+              ['7.1.213', 1], ['8.1.213', 2], ['9.1.213', 3]
+            ]
+          },
+          {
+            name: 'Ремонт',
+            id: 'Ремонт',
+            data: [
+              [1, 1],
+              [2, 2],
+              [3, 3]
+            ]
+          }
+        ]
+      },
+
+      // Render chart
+      render () {
+        if (!this.report) return
+
+        this.prepareData()
+
         Highcharts.chart(this.$refs.chart, {
           chart: {
-            type: 'column',
+            type: 'bar',
             backgroundColor: 'rgba(255, 255, 255, 0.0)'
           },
-          title: { text: '' },
-          legend: { enabled: false },
-          xAxis: { type: 'category' },
+          title: {
+            text: ''
+          },
+          legend: {
+            enabled: false
+          },
+          xAxis: {
+            type: 'category'
+          },
           yAxis: {
             title: { text: '' },
             lineWidth: 0,
             minorGridLineWidth: 0,
             lineColor: 'transparent',
-            labels: { enabled: false },
+            labels: {
+              enabled: false
+            },
             minorTickLength: 0,
             tickLength: 0
           },
           plotOptions: {
             series: {
+              borderWidth: 0,
               dataLabels: {
                 enabled: true,
                 format: '{point.y} руб.'
@@ -73,14 +117,24 @@
           series: [{
             name: 'Расходы',
             colorByPoint: true,
-            data: chartData
-          }]
+            data: this.data
+          }],
+          drilldown: {
+            series: this.drilldown
+          }
         })
       }
     },
 
     mounted () {
+      HighchartsDrilldown(Highcharts)
       this.render()
     }
   }
 </script>
+
+<style>
+  .highcharts-credits {
+    display: none;
+  }
+</style>
