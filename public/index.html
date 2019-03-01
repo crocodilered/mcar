@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <!-- FROM PWA -->
-
     <meta name="theme-color" content="#000a12">
     <link rel="icon" type="image/png" sizes="32x32" href="<%= BASE_URL %>icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="<%= BASE_URL %>icons/favicon-16x16.png">
@@ -28,9 +27,7 @@
     <!-- Add to home screen for Windows -->
     <meta name="msapplication-TileImage" content="<%= BASE_URL %>icons/msapplication-icon-144x144.png">
     <meta name="msapplication-TileColor" content="#000a12">
-
     <!-- / FROM PWA -->
-
   </head>
   <body class="mdc-typography" style="background-color: #f2f2f2;">
     <noscript>
@@ -69,4 +66,16 @@
       </div>
     </div>
   </body>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(function(reg){
+          console.log("Yes, it did.");
+        }).catch(function(err) {
+          console.log("No it didn't. This happened: ", err)
+        });
+    }
+  </script>
+
 </html>
