@@ -43,7 +43,22 @@
             v-if="currentVehicle"
             class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end"
           >
-            <vehicle-menu :vehicle="currentVehicle"/>
+            <button
+              @click="$router.push(`/vehicle/${currentVehicle.id}/update`)"
+              class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded"
+              aria-label="Редактировать"
+              title="Редактировать авто"
+            >
+              edit
+            </button>
+            <button
+              @click="$router.push(`/vehicle/${currentVehicle.id}/delete`)"
+              class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded"
+              aria-label="Удалить"
+              title="Удалить авто"
+            >
+              delete
+            </button>
           </section>
         </div>
       </header>
@@ -70,7 +85,6 @@
   import { MDCDrawer } from '@material/drawer'
   import { mapGetters, mapState } from 'vuex'
   import DrawerLink from '@/components/mdc/drawer-link'
-  import VehicleMenu from '@/components/mdc/vehicle-menu'
   import VehicleTabs from '@/components/mdc/vehicle-tabs'
 
   const computed = {
@@ -99,7 +113,6 @@
   export default {
     components: {
       DrawerLink,
-      VehicleMenu,
       VehicleTabs
     },
 
