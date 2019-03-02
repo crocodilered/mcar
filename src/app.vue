@@ -147,14 +147,31 @@
     @include mdc-typography(headline1);
     font-size: 2.5rem;
     line-height: 2.5rem;
+    margin: 1rem 0 2rem;
   }
   h2 {
     @include mdc-typography(headline2);
     font-size: 2rem;
     line-height: 2rem;
+    margin: 1rem 0 2rem;
   }
   p {
     @include mdc-typography(body1);
+    margin: 1rem 0 2rem;
+  }
+  .app-fab--absolute {
+    position: fixed ! important;
+    bottom: 1rem;
+    right: 1rem;
+  }
+  .mdc-drawer-app-content {
+    height: 100%;
+  }
+  @media(min-width: 1024px) {
+    .app-fab--absolute {
+      bottom: 1.5rem;
+      right: 1.5rem;
+    }
   }
   @media (min-width: 840px) {
     .mdc-layout-grid__cell:first-child {
