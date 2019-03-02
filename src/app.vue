@@ -36,7 +36,7 @@
       <header ref="appbar" class="mdc-top-app-bar app-bar">
         <div class="mdc-top-app-bar__row">
           <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-            <a href="#" class="demo-menu material-icons mdc-top-app-bar__navigation-icon">menu</a>
+            <a href="#" class="material-icons mdc-top-app-bar__navigation-icon">menu</a>
             <span class="mdc-top-app-bar__title">{{ title }}</span>
           </section>
           <section
@@ -49,7 +49,15 @@
       </header>
       <main ref="content" class="main-content">
         <div class="mdc-top-app-bar--fixed-adjust">
-          <vehicle-tabs v-if="vehicleManageTab"/>
+          <div class="vehicle-manage-tabs">
+            <div class="mdc-layout-grid">
+              <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+                  <vehicle-tabs v-if="vehicleManageTab"/>
+                </div>
+              </div>
+            </div>
+          </div>
           <router-view/>
         </div>
       </main>
@@ -89,7 +97,12 @@
   }
 
   export default {
-    components: { DrawerLink, VehicleMenu, VehicleTabs },
+    components: {
+      DrawerLink,
+      VehicleMenu,
+      VehicleTabs
+    },
+
     name: 'Application',
     data,
     computed,
@@ -123,7 +136,7 @@
     margin: 0;
     display: flex;
     height: 100vh;
-    background-color: #f2f2f2;
+    /* background-color: #f2f2f2; moved to elements style */
   }
   .mdc-drawer-app-content {
     flex: auto;
@@ -163,11 +176,26 @@
     position: fixed ! important;
     bottom: 1rem;
     right: 1rem;
+    z-index: 1000;
   }
   .mdc-drawer-app-content {
     height: 100%;
   }
-  @media(min-width: 1024px) {
+  .vehicle-manage-tabs {
+    background-color: $mdc-theme-primary-light;
+    .mdc-layout-grid {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  @media (max-width: $width-sm) {
+    .vehicle-manage-tabs .mdc-layout-grid {
+      padding: 0;
+    }
+  }
+
+  @media (max-width: $width-xl) {
     .app-fab--absolute {
       bottom: 1.5rem;
       right: 1.5rem;

@@ -4,10 +4,9 @@
       <div class="mdc-tab-scroller__scroll-area">
         <div class="mdc-tab-scroller__scroll-content">
           
-          <button @click="switchTab('expense')" class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="1">
+          <button @click="switchTab('expense')" class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
             <span class="mdc-tab__content">
-              <span class="mdc-tab__icon material-icons" aria-hidden="true">add</span>
-              <span class="mdc-tab__text-label">Затрата</span>
+              <span class="mdc-tab__text-label">Расходы</span>
             </span>
             <span class="mdc-tab-indicator mdc-tab-indicator--active">
               <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
@@ -15,9 +14,9 @@
             <span class="mdc-tab__ripple"></span>
           </button>
 
+          <!--
           <button @click="switchTab('report')" class="mdc-tab" role="tab" aria-selected="true" tabindex="0">
             <span class="mdc-tab__content">
-              <span class="mdc-tab__icon material-icons" aria-hidden="true">bar_chart</span>
               <span class="mdc-tab__text-label">Отчет</span>
             </span>
             <span class="mdc-tab-indicator">
@@ -25,10 +24,10 @@
             </span>
             <span class="mdc-tab__ripple"></span>
           </button>
+          -->
 
-          <button @click="switchTab('notes')" class="mdc-tab" role="tab" aria-selected="true" tabindex="2">
+          <button @click="switchTab('notes')" class="mdc-tab" role="tab" aria-selected="true" tabindex="1">
             <span class="mdc-tab__content">
-              <span class="mdc-tab__icon material-icons" aria-hidden="true">notes</span>
               <span class="mdc-tab__text-label">Заметки</span>
             </span>
             <span class="mdc-tab-indicator">
@@ -96,8 +95,6 @@
   @import "~@material/tab/mdc-tab";
 
   .mdc-tab-bar--upper {
-    background-color: $mdc-theme-primary-light;
-
     .mdc-tab__icon, 
     .mdc-tab__text-label {
       color: $mdc-theme-on-primary-light ! important;
@@ -109,12 +106,5 @@
     }
   }
 
-  @media (max-width: 840px) {
-    .mdc-tab__icon {
-      display: none;
-      .mdc-tab:not(.mdc-tab--stacked) .mdc-tab__icon + .mdc-tab__text-label {
-        padding: 0;
-      }
-    }
-  }
+
 </style>
