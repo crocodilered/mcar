@@ -18,16 +18,14 @@
 <script>
   import { mapState } from 'vuex'
   import VehicleExpense from '@/components/vehicle/vehicle-expense'
-  import VehicleReport from '@/components/vehicle/vehicle-report'
   import VehicleNotes from '@/components/vehicle/vehicle-notes'
 
   export default {
     components: {
       VehicleExpense,
-      VehicleReport,
       VehicleNotes
     },
-    
+
     computed: {
       ...mapState([
         'currentVehicle',
