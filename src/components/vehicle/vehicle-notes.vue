@@ -1,7 +1,7 @@
 <template>
   <div>
     <template v-if="mode === MODE_LIST">
-
+      <!-- FAB BUTTON -->
       <button
         class="mdc-fab app-fab--absolute"
         aria-label="Добавить заметку"
@@ -10,10 +10,9 @@
       >
         <span class="mdc-fab__icon material-icons">add</span>
       </button>
-
-      <template v-if="loading">
-        <progress-circular/>
-      </template>
+      <!-- LOADING -->
+      <progress-circular v-if="loading"/>
+      <!-- LIST -->
       <template v-else>
         <div class="list">
           <ul
@@ -45,39 +44,55 @@
       </template>
     </template>
     <template v-if="mode === MODE_FORM">
-      <div class="form">
-        <h1>
-          Добавить заметку
-        </h1>
-        <mdc-textarea
-          label="Заметка"
-          v-model="form.content"
-          rows="10"
-          autofocus="autofocus"
-          required
-        />
-        <mdc-button
-          :loading="loading"
-          @click="saveNote"
-        >
-          Сохранить
-        </mdc-button>
+      <!-- FORM -->
+      <div class="form window-overlay">
+        <div class="mdc-layout-grid">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell">
+              <button
+                @click="showList"
+                class="mdc-icon-button"
+                aria-label="Вернуться"
+                aria-hidden="true"
+                aria-pressed="false"
+              >
+                <i class="material-icons mdc-icon-button__icon">close</i>
+              </button>
+              <h1>Новая заметка</h1>
+              <mdc-textarea
+                label="Текст"
+                v-model="form.content"
+                rows="6"
+                autofocus="autofocus"
+                required
+              />
+              <mdc-button
+                :loading="loading"
+                @click="saveNote"
+              >
+                Сохранить
+              </mdc-button>
+            </div>
+          </div>
+        </div>
       </div>
     </template>
+    <!-- NOTE -->
     <template v-if="mode === MODE_NOTE">
-      <h2>
-        <button
-          @click="showList"
-          class="mdc-icon-button"
-          aria-label="Вернуться"
-          aria-hidden="true"
-          aria-pressed="false"
-        >
-          <i class="material-icons mdc-icon-button__icon">arrow_back</i>
-        </button>
-        {{ note.date.toLocaleDateString() }}
-      </h2>
       <p v-html="note.parsedContent"/>
+      <p>
+        {{ note.date.toLocaleDateString() }}
+      </p>
+      <button
+        @click="showList"
+        class="mdc-button mdc-button--outlined mdc-ripple-upgraded"
+        aria-label="Вернуться"
+        aria-hidden="true"
+        aria-pressed="false"
+      >
+        <i class="material-icons mdc-button__icon">arrow_back</i>
+        <span class="mdc-button__label">Вернуться</span>
+      </button>
     </template>
   </div>
 </template>

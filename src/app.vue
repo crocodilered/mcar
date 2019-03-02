@@ -188,13 +188,20 @@
       padding-bottom: 0;
     }
   }
-
+  .window-overlay {
+    background-color: #f2f2f2;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
   @media (max-width: $width-sm) {
     .vehicle-manage-tabs .mdc-layout-grid {
       padding: 0;
     }
   }
-
   @media (max-width: $width-xl) {
     .app-fab--absolute {
       bottom: 1.5rem;

@@ -2,28 +2,14 @@
   <div class="mdc-layout-grid">
     <div class="mdc-layout-grid__inner">
       <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
-        <div
-          v-if="vehicleManageTab === 'report'"
-          class="tab"
-        >
-          <vehicle-report
-            :vehicle="currentVehicle"
-          />
-        </div>
-        <div
-          v-if="vehicleManageTab === 'expense'"
-          class="tab"
-        >
-          <vehicle-expense :vehicle="currentVehicle"/>
-        </div>
-        <div
+        <vehicle-expense
+            v-if="vehicleManageTab === 'expenses'"
+          :vehicle="currentVehicle"
+        />
+        <vehicle-notes
           v-if="vehicleManageTab === 'notes'"
-          class="tab"
-        >
-          <vehicle-notes
-            :vehicle="currentVehicle"
-          />
-        </div>
+          :vehicle="currentVehicle"
+        />
       </div>
     </div>
   </div>
@@ -50,7 +36,7 @@
     },
 
     async created () {
-      this.$store.commit('setVehicleManageTab', 'notes')
+      this.$store.commit('setVehicleManageTab', 'expenses')
     },
 
     destroyed () {
