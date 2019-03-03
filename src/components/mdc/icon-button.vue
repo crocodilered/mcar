@@ -1,6 +1,10 @@
 <template>
   <button
     ref='button'
+    :aria-label="title"
+    :title="title"
+    aria-hidden="true"
+    aria-pressed="false"
     class="mdc-icon-button material-icons"
     @click="$emit('click')"
   >
@@ -13,6 +17,8 @@
 
   export default {
     name: 'MdcIconButton',
+
+    props: ['title'],
 
     mounted () {
       this.button = new MDCRipple(this.$refs.button)
