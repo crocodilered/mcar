@@ -74,7 +74,7 @@ p {
     right: 1.5rem;
   }
 }
-@media (min-width: 840px) {
+@media (min-width: $width-md) {
   .mdc-layout-grid__cell:first-child {
     grid-column-start: 4;
   }
