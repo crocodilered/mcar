@@ -43,58 +43,34 @@
         </div>
       </template>
     </template>
-    <template v-if="mode === MODE_FORM">
-      <!-- FORM -->
-      <div class="form window-overlay">
-        <div class="mdc-layout-grid">
-          <div class="mdc-layout-grid__inner">
-            <div class="mdc-layout-grid__cell">
-              <button
-                @click="showList"
-                class="mdc-icon-button"
-                aria-label="Закрыть"
-                aria-hidden="true"
-                aria-pressed="false"
-                style="float: right; clear: both;"
-              >
-                <i class="material-icons mdc-icon-button__icon">close</i>
-              </button>
-              <h1>Новая заметка</h1>
-              <mdc-textarea
-                label="Текст"
-                v-model="form.content"
-                rows="6"
-                autofocus="autofocus"
-                required
-              />
-              <mdc-submit
-                :loading="loading"
-                @click="saveNote"
-              >
-                Сохранить
-              </mdc-submit>
-            </div>
-          </div>
-        </div>
-      </div>
-    </template>
-    <!-- NOTE -->
-    <template v-if="mode === MODE_NOTE">
-      <p v-html="note.parsedContent"/>
-      <p>
-        {{ note.date.toLocaleDateString() }}
-      </p>
-      <button
-        @click="showList"
-        class="mdc-button mdc-button--outlined mdc-ripple-upgraded"
-        aria-label="Вернуться"
-        aria-hidden="true"
-        aria-pressed="false"
+    <!-- FORM -->
+    <overlay
+      v-if="mode === MODE_FORM"
+      title="Новая заметка"
+      @close="showList"
+    >
+      <mdc-textarea
+        label="Текст"
+        v-model="form.content"
+        rows="6"
+        autofocus="autofocus"
+        required
+      />
+      <mdc-submit
+        :loading="loading"
+        @click="saveNote"
       >
-        <i class="material-icons mdc-button__icon">arrow_back</i>
-        <span class="mdc-button__label">Вернуться</span>
-      </button>
-    </template>
+        Сохранить
+      </mdc-submit>
+    </overlay>
+    <!-- NOTE -->
+    <overlay
+      v-if="mode === MODE_NOTE"
+      :title="note.date.toLocaleDateString()"
+      @close="showList"
+    >
+      <p v-html="note.parsedContent"/>
+    </overlay>
   </div>
 </template>
 
@@ -103,12 +79,14 @@
   import ProgressCircular from '@/components/common/progress-circular'
   import MdcTextarea from '@/components/mdc/textarea'
   import MdcSubmit from '@/components/mdc/submit'
+  import Overlay from '@/components/common/overlay'
   import NoteModel from '@/models/note'
 
   export default {
     components: {
       MdcTextarea,
       MdcSubmit,
+      Overlay,
       ProgressCircular
     },
 
@@ -202,9 +180,7 @@
 
 <style lang="scss" scoped>
   @import "@/assets/variables.scss";
-  
   @import "@material/fab/mdc-fab";
-  @import "@material/icon-button/mdc-icon-button";
 
   .mdc-list li {
     cursor: pointer;
