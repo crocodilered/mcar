@@ -16,9 +16,9 @@
               v-model="email"
               required
             />
-            <mdc-button :loading="loading">
+            <mdc-submit :loading="loading">
               Восстановить
-            </mdc-button>
+            </mdc-submit>
             <mdc-snackbar
               v-model="errorSnackbar"
               :message="errorMessage"
@@ -32,7 +32,7 @@
 
 <script>
   import { auth, devUserAccount } from '@/config'
-  import MdcButton from '@/components/mdc/button'
+  import MdcSubmit from '@/components/mdc/submit'
   import MdcTextfield from '@/components/mdc/textfield'
   import MdcSnackbar from '@/components/mdc/snackbar'
 
@@ -82,7 +82,7 @@
 
   export default {
     name: 'AuthReset',
-    components: { MdcButton, MdcTextfield, MdcSnackbar },
+    components: { MdcSubmit, MdcTextfield, MdcSnackbar },
     data,
     computed,
     watch,

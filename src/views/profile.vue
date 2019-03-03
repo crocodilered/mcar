@@ -9,9 +9,9 @@
             <h5>Изменить пароль</h5>
         </form>
         <hr/>
-        <mdc-button :loding="loading" @click="doLogout">
+        <mdc-submit :loding="loading" @click="doLogout">
           Выйти
-        </mdc-button>
+        </mdc-submit>
       </div>
     </div>
   </div>
@@ -21,7 +21,7 @@
   import { mapState } from 'vuex'
   import router from '@/router'
   import { auth } from '@/config'
-  import MdcButton from '@/components/mdc/button'
+  import MdcSubmit from '@/components/mdc/submit'
 
   const data = function () {
     return {
@@ -45,7 +45,7 @@
   }
 
   export default {
-    components: { MdcButton },
+    components: { MdcSubmit },
     name: 'Profile',
     data,
     computed,

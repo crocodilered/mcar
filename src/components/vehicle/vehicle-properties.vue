@@ -43,16 +43,16 @@
       />
     </div-->
 
-    <mdc-button :loading="loading">
+    <mdc-submit :loading="loading">
       Сохранить
-    </mdc-button>
+    </mdc-submit>
   </form>
 </template>
 
 <script>
   import { storage, firestore } from '@/config'
   import MdcTextfield from '@/components/mdc/textfield'
-  import MdcButton from '@/components/mdc/button'
+  import MdcSubmit from '@/components/mdc/submit'
 
   const computed = {
     canvas () {
@@ -201,7 +201,7 @@
 
   export default {
     name: 'VehicleProperties',
-    components: { MdcButton, MdcTextfield },
+    components: { MdcSubmit, MdcTextfield },
     props: ['vehicle'],
     computed,
     data,

@@ -37,9 +37,9 @@
       min="1"
     />
 
-    <mdc-button :loading="loading">
+    <mdc-submit :loading="loading">
       Сохранить
-    </mdc-button>
+    </mdc-submit>
 
     <mdc-snackbar
       v-model="showSnackbar"
@@ -54,7 +54,7 @@
   import DatePicker from '@/components/common/date-picker'
   import InputBehavior from '@/libs/input-behavior'
 
-  import MdcButton from '@/components/mdc/button'
+  import MdcSubmit from '@/components/mdc/submit'
   import MdcSelect from '@/components/mdc/select'
   import MdcTextfield from '@/components/mdc/textfield'
   import MdcSnackbar from '@/components/mdc/snackbar'
@@ -218,7 +218,7 @@
 
   export default {
     components: {
-      MdcButton,
+      MdcSubmit,
       MdcSelect,
       MdcTextfield,
       DatePicker,

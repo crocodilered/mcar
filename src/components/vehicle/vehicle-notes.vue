@@ -67,12 +67,12 @@
                 autofocus="autofocus"
                 required
               />
-              <mdc-button
+              <mdc-submit
                 :loading="loading"
                 @click="saveNote"
               >
                 Сохранить
-              </mdc-button>
+              </mdc-submit>
             </div>
           </div>
         </div>
@@ -102,13 +102,13 @@
   import { firestore } from '@/config'
   import ProgressCircular from '@/components/common/progress-circular'
   import MdcTextarea from '@/components/mdc/textarea'
-  import MdcButton from '@/components/mdc/button'
+  import MdcSubmit from '@/components/mdc/submit'
   import NoteModel from '@/models/note'
 
   export default {
     components: {
       MdcTextarea,
-      MdcButton,
+      MdcSubmit,
       ProgressCircular
     },
 

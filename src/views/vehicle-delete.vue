@@ -14,9 +14,9 @@
               :error-text="error"
               required
             />
-            <mdc-button :loading="loading">
+            <mdc-submit :loading="loading">
               Удалить
-            </mdc-button>
+            </mdc-submit>
           </form>
         </template>
         <template v-if="vehicleDeleted">
@@ -32,7 +32,7 @@
   import { mapState } from 'vuex'
   import { storage, firestore } from '@/config'
   import MdcTextfield from '@/components/mdc/textfield'
-  import MdcButton from '@/components/mdc/button'
+  import MdcSubmit from '@/components/mdc/submit'
 
   const data = function () {
     return {
@@ -94,7 +94,7 @@
   }
 
   export default {
-    components: { MdcButton, MdcTextfield },
+    components: { MdcSubmit, MdcTextfield },
     name: 'VehicleDelete',
     computed,
     methods,

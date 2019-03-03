@@ -1,5 +1,5 @@
 <template>
-  <div class="form-button">
+  <div class="form-submit">
     <button
       ref='root'
       :disabled="loading"
@@ -23,7 +23,7 @@
   import {MDCRipple} from '@material/ripple'
 
   export default {
-    name: 'MdcButton',
+    name: 'MdcSubmit',
     props: ['loading', 'icon'],
 
     mounted () {
@@ -41,7 +41,7 @@
   @import "~@material/button/mdc-button";
 
   @media (max-width: 600px) {
-    .form-button .mdc-button {
+    .form-submit .mdc-button {
       padding: 15px 20px;
       height: auto;
     }

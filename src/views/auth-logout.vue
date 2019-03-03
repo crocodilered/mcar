@@ -4,9 +4,9 @@
     <p>Уже уходите? Возвращайтесь!</p>
 
     <form @submit.prevent="doLogout">
-      <mdc-button :loading="loading">
+      <mdc-submit :loading="loading">
         Выйти
-      </mdc-button>
+      </mdc-submit>
     </form>
 
   </b-container>
@@ -14,7 +14,7 @@
 
 <script>
   import { auth } from '@/config'
-  import MdcButton from '@/components/mdc/button'
+  import MdcSubmit from '@/components/mdc/submit'
 
   const data = function () {
     return {
@@ -41,7 +41,7 @@
 
   export default {
     name: 'AuthLogout',
-    components: { MdcButton },
+    components: { MdcSubmit },
     data,
     methods,
     created () {

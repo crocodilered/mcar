@@ -18,9 +18,9 @@
             required
             minlength="6"
           />
-          <mdc-button :loading="loading">
+          <mdc-submit :loading="loading">
             Зарегистрироваться
-          </mdc-button>
+          </mdc-submit>
           <mdc-snackbar
             v-model="errorSnackbar"
             v-bind="{ message: errorMessage }"
@@ -33,7 +33,7 @@
 
 <script>
   import { auth, authPersistence, firestore } from '@/config'
-  import MdcButton from '@/components/mdc/button'
+  import MdcSubmit from '@/components/mdc/submit'
   import MdcTextfield from '@/components/mdc/textfield'
   import MdcSnackbar from '@/components/mdc/snackbar'
   import FirebaseErrors from '@/libs/firebase/errors'
@@ -82,7 +82,7 @@
   }
 
   export default {
-    components: { MdcButton, MdcTextfield, MdcSnackbar },
+    components: { MdcSubmit, MdcTextfield, MdcSnackbar },
     name: 'AuthRegister',
     data,
     computed,

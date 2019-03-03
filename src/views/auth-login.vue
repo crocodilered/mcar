@@ -19,9 +19,9 @@
             autocomplete="current-password"
             required
           />
-          <mdc-button :loading="loading">
+          <mdc-submit :loading="loading">
             Войти
-          </mdc-button>
+          </mdc-submit>
           <mdc-snackbar
             v-model="errorSnackbar"
             v-bind="{ message: errorMessage }"
@@ -36,7 +36,7 @@
 
 <script>
   import { auth, authPersistence } from '@/config'
-  import MdcButton from '@/components/mdc/button'
+  import MdcSubmit from '@/components/mdc/submit'
   import MdcTextfield from '@/components/mdc/textfield'
   import MdcSnackbar from '@/components/mdc/snackbar'
 
@@ -92,7 +92,7 @@
   }
 
   export default {
-    components: { MdcButton, MdcTextfield, MdcSnackbar },
+    components: { MdcSubmit, MdcTextfield, MdcSnackbar },
     name: 'AuthLogin',
     data,
     computed,

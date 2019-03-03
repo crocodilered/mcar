@@ -9,12 +9,12 @@
       style="margin-top: 20%; text-align: center;"
     >
       <p style="margin-bottom: 2em;"><big>Данных пока нет</big>,<br> но вы можете добавить первую запись.</p>
-      <mdc-button
+      <mdc-submit
         @click="$store.commit('setVehicleManageTab', 'expense')"
         icon="add"
       >
         Добавить
-      </mdc-button>
+      </mdc-submit>
     </div>
 
     <div v-if="loading">
@@ -27,7 +27,7 @@
   import { firestore } from '@/config'
   import Chart from '@/components/common/chart'
   import ProgressCircular from '@/components/common/progress-circular'
-  import MdcButton from '@/components/mdc/button'
+  import MdcSubmit from '@/components/mdc/submit'
 
   const data = function () {
     return {
@@ -94,7 +94,7 @@
   }
 
   export default {
-    components: { ProgressCircular, MdcButton, Chart },
+    components: { ProgressCircular, MdcSubmit, Chart },
     name: 'VehicleReport',
     props: ['vehicle'],
     data,
