@@ -11,7 +11,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/assets/style.scss';
+  @import '@/assets/variables.scss';
 
   .progress-circular {
     margin-top: 20%;

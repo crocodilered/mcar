@@ -200,7 +200,8 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "@/assets/style.scss";
+  @import "@/assets/variables.scss";
+  
   @import "@material/fab/mdc-fab";
   @import "@material/icon-button/mdc-icon-button";
 

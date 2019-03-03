@@ -87,7 +87,7 @@
 </script>
 
 <style lang="scss">
-  @import "@/assets/style.scss";
+  @import "@/assets/variables.scss";
 
   @import "~@material/tab-bar/mdc-tab-bar";
   @import "~@material/tab-scroller/mdc-tab-scroller";

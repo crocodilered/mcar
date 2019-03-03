@@ -41,6 +41,6 @@
 </script>
 
 <style lang="scss">
-  @import "@/assets/style.scss";
+  @import "@/assets/variables.scss";
   @import "~@material/snackbar/mdc-snackbar";
 </style>
