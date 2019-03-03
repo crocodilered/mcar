@@ -52,9 +52,10 @@
               <button
                 @click="showList"
                 class="mdc-icon-button"
-                aria-label="Вернуться"
+                aria-label="Закрыть"
                 aria-hidden="true"
                 aria-pressed="false"
+                style="float: right; clear: both;"
               >
                 <i class="material-icons mdc-icon-button__icon">close</i>
               </button>
