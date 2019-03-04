@@ -7,3 +7,13 @@
     </div>
   </div>
 </template>
+
+<script>
+  export default {
+    beforeCreate () {
+      if (this.$store.getters.isAuthenticated) {
+        this.$router.push('/profile')
+      }
+    }
+  }
+</script>
