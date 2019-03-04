@@ -1,3 +1,5 @@
+const CompressionPlugin = require('compression-webpack-plugin');
+
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const PUBLIC_PATH = 'https://www.auto-notes.ru/';
 
@@ -23,7 +25,8 @@ module.exports = {
           navigateFallback: PUBLIC_PATH,
           staticFileGlobsIgnorePatterns: [/\.map$/, /manifest\.json$/]
         }
-      )
+      ),
+      new CompressionPlugin()
     ]
   }
 }
