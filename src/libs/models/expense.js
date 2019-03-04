@@ -30,11 +30,11 @@ class ExpenseModel extends AbstractModel {
 
   static getTypesEnum () {
     return [
-      { value: 1, label: 'Обслуживание' },
-      { value: 2, label: 'Ремонт' },
-      { value: 3, label: 'Тюнинг' },
-      { value: 4, label: 'Аксессуары' },
-      { value: 5, label: 'Топливо' }
+      { id: 1, label: 'Обслуживание' },
+      { id: 2, label: 'Ремонт' },
+      { id: 3, label: 'Тюнинг' },
+      { id: 4, label: 'Аксессуары' },
+      { id: 5, label: 'Топливо' }
     ]
   }
 }

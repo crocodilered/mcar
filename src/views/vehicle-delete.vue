@@ -68,7 +68,6 @@
       if (parseInt(this.currentVehicle.makeYear) === parseInt(this.makeYear)) {
         this.loading = true
         const promises = []
-        let p
 
         // Delete photo
         if (this.currentVehicle.photoPath) {

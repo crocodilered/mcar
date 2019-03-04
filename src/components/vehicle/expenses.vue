@@ -45,7 +45,7 @@
   import ProgressCircular from '@/components/common/progress-circular'
   import Overlay from '@/components/common/overlay'
   import ExpenseForm from './expense-form'
-  import ExpensesYeary from './expenses-yearly'
+  import ExpensesYeary from './expenses-year'
 
   export default {
     components: {

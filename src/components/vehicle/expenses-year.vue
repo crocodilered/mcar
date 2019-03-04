@@ -1,19 +1,18 @@
 <template>
   <div
     v-if="list"
-    class="list"
   >
-    <ul class="mdc-list mdc-list--two-line">
+    <h1>{{ year }} г.</h1>
+
+    <ul class="mdc-list mdc-list--large">
       <li
         v-for="(o, i) in list"
         :key="`item-${i}`"
         class="mdc-list-item"
-        @click="showExpense(o)"
+        @click="showExpenses(o)"
       >
-        <span class="mdc-list-item__text">
-          <span class="mdc-list-item__primary-text">{{ o.label }}</span>
-          <span class="mdc-list-item__secondary-text">{{ o.amount }}</span>
-        </span>
+        {{ o.label }}
+        <span class="mdc-list-item__meta">{{ o.amount }} руб.</span>
       </li>
     </ul>
   </div>
@@ -29,7 +28,14 @@
 
     data () {
       return {
-        list: undefined
+        list: undefined,
+        listElem: undefined
+      }
+    },
+
+    methods: {
+      showExpenses (expenseType) {
+        console.log(expenseType.id)
       }
     },
 
@@ -62,3 +68,12 @@
     }
   }
 </script>
+
+<style lang="scss" scoped>
+  .mdc-list li {
+    cursor: pointer;
+  }
+  .mdc-list--large li {
+    font-size: 120%;
+  }
+</style>
