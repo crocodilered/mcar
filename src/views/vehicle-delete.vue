@@ -44,7 +44,11 @@
   }
 
   const computed = {
-    ...mapState(['user', 'currentVehicle']),
+    ...mapState([
+      'user',
+      'vehicles',
+      'currentVehicle'
+    ]),
 
     vehicleRef () {
       return firestore
@@ -53,9 +57,15 @@
     }
   }
 
+  const watch = {
+    makeYear () {
+      this.error = null
+    }
+  }
+
   const methods = {
     deleteVehicle () {
-      if (this.currentVehicle.makeYear === parseInt(this.makeYear)) {
+      if (parseInt(this.currentVehicle.makeYear) === parseInt(this.makeYear)) {
         this.loading = true
         const promises = []
         let p
@@ -69,7 +79,7 @@
         promises.push(this.vehicleRef.delete())
 
         // Delete vehicle sub-collections
-        let deleteVehicleSubCollection = function (collectionName) {
+        let deleteVehicleSubCollection = (collectionName) => {
           let collection = this.vehicleRef.collection(collectionName)
           collection.get()
             .then(snapshot => {
@@ -84,13 +94,16 @@
         deleteVehicleSubCollection('expensesAggregatedYearly')
         deleteVehicleSubCollection('notes')
 
-        Promise.all(promises).then(() => {
-          this.loading = false
-          this.vehicleDeleted = true
+        Promise.all(promises)
+          .then(() => {
+            this.loading = false
+            this.vehicleDeleted = true
 
-          // Update local vehilcles data
-          this.$store.dispatch('clearCurrentVehicle')
-        })
+            // Update local vehilcles data
+            delete this.vehicles[this.currentVehicle.id]
+            this.$store.commit('setVehicles', this.vehicles)
+            this.$store.commit('setCurrentVehicle', null)
+          })
       } else {
         // Do something to say the given makeYear is wrong
         this.error = 'Указан неверный год.'
@@ -102,6 +115,7 @@
     components: { MdcSubmit, MdcTextfield },
     name: 'VehicleDelete',
     computed,
+    watch,
     methods,
     data
   }

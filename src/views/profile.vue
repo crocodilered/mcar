@@ -38,9 +38,11 @@
     async doLogout () {
       this.loading = true
       await auth.signOut()
+      this.$store.commit('setUser', null)
+      this.$store.commit('setCurrentVehicle', null)
+      this.$store.commit('setVehicles', null)
       this.loading = false
       router.push('/')
-      this.$store.dispatch('userLogout')
     }
   }
 

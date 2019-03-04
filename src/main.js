@@ -6,7 +6,7 @@ import App from './app'
 import router from './router'
 import store from './store'
 import { auth, firestore } from './config'
-import VehicleModel from '@/models/vehicle-model'
+import VehicleModel from '@/libs/models/vehicle'
 
 Vue.config.productionTip = false
 
@@ -24,11 +24,11 @@ auth.onAuthStateChanged(async function (user) {
         vehicleModel.json = vehicle.data()
         vehicles[vehicle.id] = vehicleModel
       })
-      store.dispatch('loadVehicles', vehicles)
+      store.commit('setVehicles', vehicles)
     }
   } else {
     store.commit('setUser', null)
-    store.dispatch('loadVehicles', null)
+    store.commit('setVehicles', null)
   }
   /* eslint-disable no-new */
   new Vue({

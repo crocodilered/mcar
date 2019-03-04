@@ -14,7 +14,7 @@
 </template>
 
 <script>
-  import VehicleProperties from '@/components/vehicle/vehicle-properties'
+  import VehicleProperties from '@/components/vehicle/properties'
 
   const data = function () {
     return {

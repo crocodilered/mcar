@@ -13,8 +13,8 @@
 </template>
 
 <script>
-  import VehicleModel from '@/models/vehicle-model'
-  import VehicleProperties from '@/components/vehicle/vehicle-properties'
+  import VehicleModel from '@/libs/models/vehicle'
+  import VehicleProperties from '@/components/vehicle/properties'
 
   export default {
     name: 'VehicleCreate',

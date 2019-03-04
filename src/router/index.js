@@ -38,7 +38,7 @@ router.beforeEach((to, from, next) => {
   if (to.params.vehicleId) {
     store.dispatch('selectCurrentVehicle', to.params.vehicleId)
   } else {
-    store.dispatch('clearCurrentVehicle')
+    store.commit('setCurrentVehicle', null)
   }
 
   if (authRequired && !isAuthenticated) {

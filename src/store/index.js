@@ -6,23 +6,19 @@ Vue.use(Vuex)
 const baseState = {
   user: null,
   vehicles: null,
-  navigationVehicles: null,
   currentVehicle: null,
   vehicleManageTab: null
 }
 
 const mutations = {
-  setUser: (state, payload) => {
-    state.user = payload
+  setUser: (state, user) => {
+    state.user = user
   },
-  setVehicles: (state, payload) => {
-    state.vehicles = payload
+  setVehicles: (state, vehicles) => {
+    state.vehicles = vehicles
   },
-  setNavigationVehicles: (state, payload) => {
-    state.navigationVehicles = payload
-  },
-  setCurrentVehicle: (state, payload) => {
-    state.currentVehicle = payload
+  setCurrentVehicle: (state, vehicle) => {
+    state.currentVehicle = vehicle
   },
   setVehicleManageTab: (state, tab) => {
     state.vehicleManageTab = tab
@@ -36,46 +32,14 @@ const getters = {
 }
 
 const actions = {
-  loadVehicles: ({commit, state, dispatch}, vehicles) => {
-    commit('setVehicles', vehicles)
-    if (vehicles) {
-      const navigationVehicles = {}
-      for (let i in vehicles) {
-        navigationVehicles[i] = {
-          title: vehicles[i].title.slice(),
-          photoUrl: vehicles[i].photoUrl
-        }
-      }
-      commit('setNavigationVehicles', navigationVehicles)
-      if (state.currentVehicle) {
-        dispatch('selectCurrentVehicle', state.currentVehicle.id)
-      }
-    } else {
-      commit('setNavigationVehicles', null)
-    }
-  },
-
   // Current vehicle
+  /**
+   * Set current vehicle with vehicle id only.
+   */
   selectCurrentVehicle: ({commit, state}, vehicleId) => {
     if (state.vehicles && vehicleId) {
       commit('setCurrentVehicle', state.vehicles[vehicleId])
     }
-  },
-
-  clearCurrentVehicle: ({commit}) => {
-    commit('setCurrentVehicle', null)
-  },
-
-  // User
-  userSignIn: ({commit}, payload) => {
-    commit('setUser', payload.user)
-  },
-
-  userLogout: ({commit}) => {
-    commit('setUser', null)
-    commit('setCurrentVehicle', null)
-    commit('setNavigationVehicles', null)
-    commit('setVehicles', null)
   }
 }
 

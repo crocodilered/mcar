@@ -2,7 +2,7 @@
   <div id="app">
     <aside ref="drawer" class="mdc-drawer mdc-drawer--dismissible">
       <div class="mdc-drawer__header">
-        <h3 class="mdc-drawer__title">Автоистория</h3>
+        <h3 class="mdc-drawer__title">Авто-заметки</h3>
         <h6 class="mdc-drawer__subtitle" v-if="user">{{ user.email }}</h6>
       </div>
       <div class="mdc-drawer__content">
@@ -13,7 +13,7 @@
             <hr class="mdc-list-divider">
             <h6 class="mdc-list-group__subheader">Автомобили</h6>
             <drawer-link
-              v-for="(o, i) in navigationVehicles"
+              v-for="(o, i) in vehicles"
               :key="`nav-vehicle-${i}`"
               :to="`/vehicle/${i}`"
               :text="o.title"
@@ -91,15 +91,15 @@
     ...mapGetters(['isAuthenticated']),
     ...mapState([
       'vehicleManageTab',
-      'navigationVehicles',
       'currentVehicle',
+      'vehicles',
       'user'
     ]),
 
     title () {
       return this.currentVehicle
         ? this.currentVehicle.title.slice()
-        : 'Автоистория'
+        : 'Авто-заметки'
     }
   }
 
