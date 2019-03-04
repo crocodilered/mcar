@@ -1,5 +1,5 @@
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
-const PUBLIC_PATH = 'https://www.my-car.com/';
+const PUBLIC_PATH = 'https://www.auto-notes.ru/';
 
 module.exports = {
   runtimeCompiler: true,
@@ -20,7 +20,7 @@ module.exports = {
           dontCacheBustUrlsMatching: /\.\w{8}\./,
           filename: 'service-worker.js',
           minify: true,
-          navigateFallback: PUBLIC_PATH + 'index.html',
+          navigateFallback: PUBLIC_PATH,
           staticFileGlobsIgnorePatterns: [/\.map$/, /manifest\.json$/]
         }
       )
