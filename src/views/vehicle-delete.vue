@@ -4,8 +4,8 @@
       <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
         <template v-if="currentVehicle && !vehicleDeleted">
           <h1>Удаление авто</h1>
-          <p>Вы собираетесь удалить всю информацию об автомобиле <b><nobr>{{ currentVehicle.title }}</nobr></b>.</p>
-          <p>Это необратимая операция и данные нельзя будет восстановить. Если вы не передумали, подтвердите удаление, указав год выпуска авто ({{ currentVehicle.makeYear }}) и нажав кнопку «Удалить».</p>
+          <p>Вы собираетесь удалить всю информацию об автомобиле <nobr>{{ currentVehicle.title }}</nobr>.</p>
+          <p>Это необратимая операция и данные нельзя будет восстановить. Если вы не передумали, подтвердите удаление, указав год выпуска авто (<b>{{ currentVehicle.makeYear }}</b>) и нажав кнопку «Удалить».</p>
           <form @submit.prevent="deleteVehicle">
             <mdc-textfield
               label="Год выпуска авто"
@@ -37,14 +37,20 @@
   const data = function () {
     return {
       makeYear: null,
-      error: 'эыва',
+      error: null,
       vehicleDeleted: false,
       loading: false
     }
   }
 
   const computed = {
-    ...mapState(['user', 'currentVehicle'])
+    ...mapState(['user', 'currentVehicle']),
+
+    vehicleRef () {
+      return firestore
+        .collection('users').doc(this.user.uid)
+        .collection('vehicles').doc(this.currentVehicle.id)
+    }
   }
 
   const methods = {
@@ -59,31 +65,30 @@
           promises.push(storage.ref().child(this.currentVehicle.photoPath).delete())
         }
 
-        // Delete doc
-        p = firestore
-          .collection('users').doc(this.user.uid)
-          .collection('vehicles').doc(this.currentVehicle.id).delete()
-        promises.push(p)
+        // Delete vehicle doc
+        promises.push(this.vehicleRef.delete())
 
-        // Delete expenses sub-collection
-        const expensesCollection = firestore
-          .collection('users').doc(this.user.uid)
-          .collection('vehicles').doc(this.currentVehicle.id)
-          .collection('expenses')
-        expensesCollection.get()
-          .then(querySnapshot => {
-            querySnapshot.forEach(doc => {
-              promises.push(expensesCollection.doc(doc.id).delete())
+        // Delete vehicle sub-collections
+        let deleteVehicleSubCollection = function (collectionName) {
+          let collection = this.vehicleRef.collection(collectionName)
+          collection.get()
+            .then(snapshot => {
+              snapshot.forEach(doc => {
+                promises.push(collection.doc(doc.id).delete())
+              })
             })
-          })
+        }
+
+        deleteVehicleSubCollection('expenses')
+        deleteVehicleSubCollection('expensesAggregatedMonthly')
+        deleteVehicleSubCollection('expensesAggregatedYearly')
+        deleteVehicleSubCollection('notes')
 
         Promise.all(promises).then(() => {
           this.loading = false
           this.vehicleDeleted = true
 
-          // Update local vehilcles cache
-          // delete this.vehicles[this.currentVehicle.id]
-          this.$store.dispatch('loadVehicles', this.vehicles)
+          // Update local vehilcles data
           this.$store.dispatch('clearCurrentVehicle')
         })
       } else {
