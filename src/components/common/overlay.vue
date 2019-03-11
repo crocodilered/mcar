@@ -21,6 +21,7 @@
 
 <script>
   import MdcIconButton from '@/components/mdc/icon-button'
+
   export default {
     components: { MdcIconButton },
     name: 'Overlay',
@@ -29,5 +30,13 @@
 </script>
 
 <style>
-
+  .window-overlay {
+    background-color: #f2f2f2;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 4;
+  }
 </style>

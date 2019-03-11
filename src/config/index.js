@@ -17,7 +17,7 @@ export const auth = firebase.auth()
 export const authPersistence = firebase.auth.Auth.Persistence
 export const storage = firebase.storage()
 
-export const devUserAccount = {
+export const devAccount = {
   validEmail: 'serge.zolotukhn@gmail.com',
   invalidEmail: 'serge.zolotukhn@gmail.ru',
   password: '123qweQWE'

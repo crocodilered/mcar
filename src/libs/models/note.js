@@ -23,6 +23,10 @@ class NoteModel extends AbstractModel {
   get parsedContent () {
     return AbstractModel.parseUserInput(this.content)
   }
+
+  get title () {
+    return this.content.replace(/\n.+/g, '')
+  }
 }
 
 export default NoteModel

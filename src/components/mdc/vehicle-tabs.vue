@@ -4,7 +4,7 @@
       <div class="mdc-tab-scroller__scroll-area">
         <div class="mdc-tab-scroller__scroll-content">
           
-          <button @click="switchTab('expense')" class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+          <button @click="switchTab('expenses')" class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
             <span class="mdc-tab__content">
               <span class="mdc-tab__text-label">Расходы</span>
             </span>

@@ -1,6 +1,7 @@
 <template>
   <div>
     <template v-if="mode === MODE_LIST">
+
       <!-- FAB BUTTON -->
       <button
         class="mdc-fab app-fab--absolute"
@@ -10,10 +11,12 @@
       >
         <span class="mdc-fab__icon material-icons">add</span>
       </button>
+
       <!-- LOADING -->
       <progress-circular v-if="loading"/>
-      <!-- LIST -->
+
       <template v-else>
+        <!-- LIST -->
         <div class="list">
           <ul
             v-if="list"
@@ -26,7 +29,7 @@
               @click="showNote(o)"
             >
               <span class="mdc-list-item__text">
-                <span class="mdc-list-item__primary-text">{{ o.content }}</span>
+                <span class="mdc-list-item__primary-text">{{ o.title }}</span>
                 <span class="mdc-list-item__secondary-text">{{ o.date.toLocaleDateString() }}</span>
               </span>
             </li>

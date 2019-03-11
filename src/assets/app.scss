@@ -51,15 +51,7 @@ p {
     padding-bottom: 0;
   }
 }
-.window-overlay {
-  background-color: #f2f2f2;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-}
+
 @media (max-width: $width-sm) {
   .vehicle-manage-tabs .mdc-layout-grid {
     padding: 0;
@@ -88,4 +80,36 @@ p {
   .mdc-layout-grid__cell:first-child {
     grid-column-start: 4;
   }
+}
+
+/* MDC TABLE */
+
+.mdc-table {
+  width: 100%;
+}
+
+.mdc-table td {
+  cursor: pointer;
+  padding: 1rem 0 1rem .8rem;
+  border-bottom: 1px solid #dcdcdc;
+}
+
+.mdc-table td:first-child {
+  padding-left: 0;
+}
+
+.mdc-table tr:first-child td {
+  border-top: 1px solid #dcdcdc;
+}
+
+.mdc-table--big td {
+  font-size: 110%;
+}
+
+/* TRANSITIONS */
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .2s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }

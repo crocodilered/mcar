@@ -31,7 +31,7 @@
 </template>
 
 <script>
-  import { auth, devUserAccount } from '@/config'
+  import { auth, devAccount } from '@/config'
   import MdcSubmit from '@/components/mdc/submit'
   import MdcTextfield from '@/components/mdc/textfield'
   import MdcSnackbar from '@/components/mdc/snackbar'
@@ -40,7 +40,7 @@
 
   const data = function () {
     return {
-      email: devUserAccount.validEmail,
+      email: devAccount.validEmail,
       loading: false,
       errorCode: null,
       errorSnackbar: false,

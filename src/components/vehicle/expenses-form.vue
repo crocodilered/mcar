@@ -2,7 +2,12 @@
   <form @submit.prevent="createExpense">
     <mdc-select
       label="Тип"
-      :options="expenseTypeEnum.map(item => (item.value = item.id))"
+      :options="expenseTypeEnum.map(item => {
+        return {
+          value: item.id,
+          label: item.label
+        }
+      })"
       v-model="expense.type"
     />
 
