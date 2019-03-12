@@ -16,6 +16,7 @@ auth.onAuthStateChanged(async function (user) {
     const snapshot = await firestore
       .collection('users').doc(user.uid)
       .collection('vehicles')
+      .orderBy('title')
       .get()
     if (!snapshot.empty) {
       const vehicles = {}

@@ -17,7 +17,7 @@
 
 <script>
   import { mapState } from 'vuex'
-  import VehicleExpenses from '@/components/vehicle/expenses'
+  import VehicleExpenses from '@/components/vehicle/expenses/expenses'
   import VehicleNotes from '@/components/vehicle/notes'
 
   export default {

@@ -1,28 +1,32 @@
 <template>
   <div v-if="list">
-    <h1>{{ year }} год</h1>
-
-    <table class="mdc-table mdc-table--big" :key="`data-${year}`">
-      <tr
-        v-for="(o, i) in list"
-        :key="`item-${i}`"
-        @click="$emit('show-complete-list', o)"
-      >
-        <td>{{ o.label }}</td>
-        <td>{{ o.amount }} ₽</td>
-      </tr>
-    </table>
-
+    <progress-circular v-if="loading"/>
+    <template v-else>
+      <h1>{{ year }} год</h1>
+      <table class="mdc-table mdc-table--big" :key="`data-${year}`">
+        <tr
+          v-for="(o, i) in list"
+          :key="`item-${i}`"
+          @click="$emit('show-complete-list', o)"
+        >
+          <td>{{ o.label }}</td>
+          <td>{{ o.amount }} ₽</td>
+        </tr>
+      </table>
+    </template>
   </div>
 </template>
 
 <script>
   import { firestore } from '@/config'
   import ExpenseModel from '@/libs/models/expense'
+  import ProgressCircular from '@/components/common/progress-circular'
 
   export default {
-    name: 'ExpenseListGeneral',
+    name: 'TotalsList',
     props: ['vehicle', 'year'],
+
+    components: { ProgressCircular },
 
     data () {
       return {

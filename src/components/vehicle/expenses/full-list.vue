@@ -53,7 +53,7 @@
   import Overlay from '@/components/common/overlay'
 
   export default {
-    name: 'ExpenseListComplete',
+    name: 'FullList',
     props: ['vehicle', 'year', 'expenseType'],
     components: { Overlay, MdcIconButton },
 

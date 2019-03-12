@@ -17,25 +17,12 @@
         <!-- LIST GENERAL -->
         <transition name="fade">
           <div v-if="mode === MODE_GENERAL_LIST">
-            <div
-              ref="yearsChipset"
-              v-if="yearsList.length > 1"
-              class="mdc-chip-set  mdc-chip-set--choice"
-            >
-              <div
-                v-for="(o, i) in yearsList"
-                :key="`year-list-nav-${i}`"
-                @click="year = o"
-                :tabindex="i"
-                class="mdc-chip year-chip"
-              >
-                <div class="mdc-chip__text">
-                  {{ o }}
-                </div>
-              </div>
-            </div>
-
-            <list-general
+            <years-chips
+              v-if="years.length > 1"
+              :years="years"
+              v-model="year"
+            />
+            <totals-list
               :year="year"
               :vehicle="vehicle"
               @show-complete-list="showCompleteList"
@@ -44,7 +31,7 @@
         </transition>
         <!-- LIST COMPLETE -->
         <transition name="fade">
-          <list-complete
+          <full-list
             v-if="mode === MODE_COMPLETE_LIST"
             :year="year"
             :vehicle="vehicle"
@@ -61,7 +48,7 @@
         title="Новая запись"
         @close="showGeneralList"
       >
-        <details-form :vehicle="vehicle"/>
+        <forma :vehicle="vehicle"/>
       </overlay>
     </transition>
   </div>
@@ -71,18 +58,19 @@
   import { firestore } from '@/config'
   import ProgressCircular from '@/components/common/progress-circular'
   import Overlay from '@/components/common/overlay'
-  import DetailsForm from './expenses-form'
-  import ListGeneral from './expenses-list-general'
-  import ListComplete from './expenses-list-complete'
-  import { MDCChipSet } from '@material/chips'
+  import Forma from './forma'
+  import TotalsList from './totals-list'
+  import FullList from './full-list'
+  import YearsChips from './years-chips'
 
   export default {
     components: {
-      ListGeneral,
-      ListComplete,
+      TotalsList,
+      FullList,
+      YearsChips,
       Overlay,
       ProgressCircular,
-      DetailsForm
+      Forma
     },
 
     name: 'VehicleExpenses',
@@ -94,7 +82,7 @@
         MODE_COMPLETE_LIST: 'complete-list',
         MODE_FORM: 'form',
         mode: 'general-list',
-        yearsList: undefined,
+        years: undefined,
         year: undefined,
         form: undefined,
         expenseType: undefined,
@@ -122,7 +110,7 @@
         const snapshot = await this.vehicleRef
           .collection('expensesAggregatedYearly')
           .get()
-        this.yearsList = snapshot.empty
+        this.years = snapshot.empty
           ? null
           : snapshot.docs
             .map(doc => doc.data().date.toDate().getFullYear())
@@ -143,33 +131,15 @@
       }
     },
 
-    mounted () {
-      if (this.$refs.yearsChipset) {
-        this.yearsChipset = new MDCChipSet(this.$refs.yearsChipset)
-      }
-    },
-
-    destroyed () {
-      if (this.yearsChipset) {
-        this.yearsChipset.destroy()
-      }
-    },
-
     async created () {
       this.loading = true
       await this.loadYears()
-      this.year = this.yearsList[0]
+      this.year = this.years[0]
       this.loading = false
     }
   }
 </script>
 
 <style lang="scss" scoped>
-  @import "@/assets/variables.scss";
   @import "@material/fab/mdc-fab";
-  @import "@material/chips/mdc-chips";
-
-  .year-chip {
-    border-radius: 4px;
-  }
 </style>

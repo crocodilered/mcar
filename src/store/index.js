@@ -32,7 +32,6 @@ const getters = {
 }
 
 const actions = {
-  // Current vehicle
   /**
    * Set current vehicle with vehicle id only.
    */
