@@ -8,7 +8,6 @@ const routerOptions = [
   { path: '/', component: 'landing' },
   { path: '/register', component: 'auth-register' },
   { path: '/login', component: 'auth-login' },
-  { path: '/logout', component: 'auth-logout', meta: { authRequired: true } },
   { path: '/reset-password', component: 'auth-reset-password' },
   { path: '/profile', component: 'profile', meta: { authRequired: true } },
   { path: '/vehicle', component: 'vehicle-list', meta: { authRequired: true } },

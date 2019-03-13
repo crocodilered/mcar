@@ -17,13 +17,16 @@ class VehicleModel {
   }
 
   get json () {
-    return {
+    const json = {
       title: this.title,
-      makeYear: this.makeYear,
-      mileage: this.mileage,
-      photoPath: this.photoPath,
-      photoUrl: this.photoUrl
+      makeYear: this.makeYear
     }
+
+    if (this.mileage) json['mileage'] = this.mileage
+    if (this.photoPath)  json['photoPath'] = this.photoPath
+    if (this.photoUrl)  json['photoUrl'] = this.photoUrl
+
+    return json
   }
 
   set json (value) {

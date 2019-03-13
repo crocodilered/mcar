@@ -23,7 +23,7 @@ h1 {
   @include mdc-typography(headline1);
   font-size: 2.5rem;
   line-height: 2.5rem;
-  margin: 1rem 0;
+  margin: 1rem 0 2rem;
 }
 h2 {
   @include mdc-typography(headline2);
@@ -39,7 +39,7 @@ h3 {
 }
 p {
   @include mdc-typography(body1);
-  margin: 1rem 0 2rem;
+  margin: 1rem 0 1rem;
 }
 .app-fab--absolute {
   position: fixed ! important;

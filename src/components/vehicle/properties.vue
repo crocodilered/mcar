@@ -166,6 +166,7 @@
         let emit, appendixData, options
 
         this.loading = true
+
         if (this.vehicle.id) {
           emit = 'update'
           appendixData = { updated: new Date() }
@@ -180,7 +181,9 @@
         await this.savePhoto()
 
         this.vehicle.title = this.vehicleTitle
-        collRef.doc(this.vehicle.id).set({ ...this.vehicle.json, ...appendixData }, options)
+
+        collRef.doc(this.vehicle.id)
+          .set({ ...this.vehicle.json, ...appendixData }, options)
           .then(() => {
             this.$emit(emit)
             // Update local cache
