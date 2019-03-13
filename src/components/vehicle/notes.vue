@@ -36,44 +36,44 @@
           </ul>
           <div
             v-else
-            style="
-              margin-top: 40%;
-              text-align: center;
-            "
-          >
-            <p style="margin-bottom: 2em;"><big>Данных пока нет</big>,<br> но вы можете добавить первую запись.</p>
-          </div>
+            class="message-of-empty"
+          />
         </div>
       </template>
     </template>
+
     <!-- FORM -->
-    <overlay
-      v-if="mode === MODE_FORM"
-      title="Новая заметка"
-      @close="showList"
-    >
-      <mdc-textarea
-        label="Текст"
-        v-model="form.content"
-        rows="6"
-        autofocus="autofocus"
-        required
-      />
-      <mdc-submit
-        :loading="loading"
-        @click="saveNote"
+    <transition name="fade">
+      <overlay
+        v-if="mode === MODE_FORM"
+        title="Новая заметка"
+        @close="showList"
       >
-        Сохранить
-      </mdc-submit>
-    </overlay>
+        <mdc-textarea
+          label="Текст"
+          v-model="form.content"
+          rows="6"
+          autofocus="autofocus"
+          required
+        />
+        <mdc-submit
+          :loading="loading"
+          @click="saveNote"
+        >
+          Сохранить
+        </mdc-submit>
+      </overlay>
+    </transition>
+
     <!-- NOTE -->
-    <overlay
-      v-if="mode === MODE_NOTE"
-      :title="note.date.toLocaleDateString()"
-      @close="showList"
-    >
-      <p v-html="note.parsedContent"/>
-    </overlay>
+    <transition name="fade">
+      <overlay
+        v-if="mode === MODE_NOTE"
+        @close="showList"
+      >
+        <p v-html="note.parsedContent"/>
+      </overlay>
+    </transition>
   </div>
 </template>
 

@@ -229,7 +229,7 @@
       DatePicker,
       MdcSnackbar
     },
-    name: 'Forma',
+    name: 'ExpensesForm',
     props: ['vehicle'],
     data,
     computed,

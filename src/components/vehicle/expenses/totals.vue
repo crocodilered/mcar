@@ -1,7 +1,6 @@
 <template>
-  <div v-if="list">
-    <progress-circular v-if="loading"/>
-    <template v-else>
+  <div>
+    <div v-if="list">
       <h1>{{ year }} год</h1>
       <table class="mdc-table mdc-table--big" :key="`data-${year}`">
         <tr
@@ -13,7 +12,10 @@
           <td>{{ o.amount }} ₽</td>
         </tr>
       </table>
-    </template>
+    </div>
+    <progress-circular
+      v-if="list === null"
+    />
   </div>
 </template>
 
@@ -23,7 +25,7 @@
   import ProgressCircular from '@/components/common/progress-circular'
 
   export default {
-    name: 'TotalsList',
+    name: 'ExpensesTotals',
     props: ['vehicle', 'year'],
 
     components: { ProgressCircular },
@@ -45,6 +47,10 @@
 
     methods: {
       async loadList () {
+        if (!this.vehicle || !this.year) return
+
+        this.list = null
+
         const snapshot = await firestore
           .collection('users').doc(this.$store.state.user.uid)
           .collection('vehicles').doc(this.vehicle.id)
@@ -60,8 +66,6 @@
               : 0
             return item
           })
-        } else {
-          this.list = null
         }
       }
     },

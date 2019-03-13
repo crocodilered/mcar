@@ -20,7 +20,6 @@
               @click.native="drawer.open = false"
               icon="directions_car"
             />
-            <drawer-link @click.native="drawer.open = false" to="/vehicle/create" icon="add" text="Добавить авто" />
           </template>
           <template v-else>
             <drawer-link @click.native="drawer.open = false" to="/login" icon="exit_to_app" text="Войти" />
@@ -38,27 +37,6 @@
           <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
             <a href="#" class="material-icons mdc-top-app-bar__navigation-icon">menu</a>
             <span class="mdc-top-app-bar__title">{{ title }}</span>
-          </section>
-          <section
-            v-if="currentVehicle"
-            class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end"
-          >
-            <button
-              @click="$router.push(`/vehicle/${currentVehicle.id}/update`)"
-              class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded"
-              aria-label="Редактировать"
-              title="Редактировать авто"
-            >
-              edit
-            </button>
-            <button
-              @click="$router.push(`/vehicle/${currentVehicle.id}/delete`)"
-              class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded"
-              aria-label="Удалить"
-              title="Удалить авто"
-            >
-              delete
-            </button>
           </section>
         </div>
       </header>

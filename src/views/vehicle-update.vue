@@ -24,7 +24,7 @@
 
   const methods = {
     redirect () {
-      this.$router.push(`/vehicle/${this.vehicle.id}`)
+      this.$router.push(`/profile/`)
     }
   }
 

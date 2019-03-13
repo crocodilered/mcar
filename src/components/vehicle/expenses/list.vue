@@ -49,11 +49,10 @@
 <script>
   import { firestore } from '@/config'
   import MdcIconButton from '@/components/mdc/icon-button'
-  import ExpenseModel from '@/libs/models/expense'
   import Overlay from '@/components/common/overlay'
 
   export default {
-    name: 'FullList',
+    name: 'ExpensesList',
     props: ['vehicle', 'year', 'expenseType'],
     components: { Overlay, MdcIconButton },
 
@@ -64,28 +63,44 @@
       }
     },
 
+    watch: {
+      vehicle () {
+        this.loadList()
+      },
+      year () {
+        this.loadList()
+      },
+      expenseType () {
+        this.loadList()
+      }
+    },
+
     methods: {
+      async loadList () {
+        // Load list for given year
+        const dateFrom = new Date(this.year, 0, 1)
+        const dateTo = new Date(this.year, 11, 31, 23, 59, 59)
+        const snapshot = await firestore
+          .collection('users').doc(this.$store.state.user.uid)
+          .collection('vehicles').doc(this.vehicle.id)
+          .collection('expenses')
+          .where('type', '==', this.expenseType.id)
+          .where('date', '>=', dateFrom)
+          .where('date', '<=', dateTo)
+          .orderBy('date', 'desc')
+          .get()
+
+        this.list = snapshot.docs.map(doc => {
+          return doc.data()
+        })
+      },
       showDetails (expense) {
         this.details = expense
       }
     },
 
-    async created () {
-      // Load list for given year
-      const dateFrom = new Date(this.year, 0, 1)
-      const dateTo = new Date(this.year, 11, 31, 23, 59, 59)
-      const snapshot = await firestore
-        .collection('users').doc(this.$store.state.user.uid)
-        .collection('vehicles').doc(this.vehicle.id)
-        .collection('expenses')
-        .where('type', '==', this.expenseType.id)
-        .where('date', '>=', dateFrom)
-        .where('date', '<=', dateTo)
-        .get()
-
-      this.list = snapshot.docs.map(doc => {
-        return doc.data()
-      })
+    created () {
+      this.loadList()
     }
   }
 </script>

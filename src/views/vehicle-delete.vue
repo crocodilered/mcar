@@ -4,7 +4,7 @@
       <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
         <template v-if="currentVehicle && !vehicleDeleted">
           <h1>Удаление авто</h1>
-          <p>Вы собираетесь удалить всю информацию об автомобиле <nobr>{{ currentVehicle.title }}</nobr>.</p>
+          <p>Вы собираетесь удалить всю информацию об автомобиле <nobr><big>{{ currentVehicle.title }}</big></nobr>.</p>
           <p>Это необратимая операция и данные нельзя будет восстановить. Если вы не передумали, подтвердите удаление, указав год выпуска авто (<b>{{ currentVehicle.makeYear }}</b>) и нажав кнопку «Удалить».</p>
           <form @submit.prevent="deleteVehicle">
             <mdc-textfield

@@ -2,7 +2,8 @@
   <button
     ref='button'
     :disabled="loading"
-    class="mdc-button mdc-button--unelevated mdc-button--extended"
+    :class="cssClass"
+    class="mdc-button"
     @click="$emit('click')"
   >
     <i
@@ -22,7 +23,18 @@
 
   export default {
     name: 'MdcButton',
-    props: ['loading', 'icon'],
+    props: ['loading', 'icon', 'plain', 'outlined'],
+
+    computed: {
+      cssClass () {
+        return {
+          'mdc-button--unelevated': (this.plain === undefined && this.outlined === undefined),
+          'mdc-button--plain': (this.plain !== undefined),
+          'mdc-button--outlined': (this.outlined !== undefined),
+          'mdc-button--extended': (this.plain === undefined)
+        }
+      }
+    },
 
     mounted () {
       this.button = new MDCRipple(this.$refs.button)
