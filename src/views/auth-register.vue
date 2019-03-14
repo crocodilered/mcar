@@ -1,7 +1,7 @@
 <template>
   <div class="mdc-layout-grid">
     <div class="mdc-layout-grid__inner">
-      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+      <div class="mdc-layout-grid__cell--main">
         <h1>Регистрация</h1>
         <p>Для регистрации укажите свой адрес электронной почты и придумайте <b>пароль не короче шести</b> символов.</p>
         <form @submit.prevent="doRegister">

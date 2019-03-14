@@ -4,7 +4,7 @@
     class="mdc-layout-grid"
   >
     <div class="mdc-layout-grid__inner">
-      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+      <div class="mdc-layout-grid__cell--main">
         <vehicle-expenses
           v-if="vehicleManageTab === 'expenses'"
           :vehicle="currentVehicle"

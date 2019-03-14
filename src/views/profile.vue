@@ -1,15 +1,12 @@
 <template>
   <div class="mdc-layout-grid">
     <div class="mdc-layout-grid__inner">
-      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+      <div class="mdc-layout-grid__cell--main">
         <h1>Профиль</h1>
 
         <h3>Ваши автомобили</h3>
         <div class="mdc-layout-grid__inner">
-          <div class="
-            mdc-layout-grid__cell
-            mdc-layout-grid__cell--span-6
-          "
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12"
             v-for="(o, i) in vehicles"
             :key="`vehicle-card-${i}`"
           >
@@ -36,10 +33,10 @@
                   </mdc-button>
                 </div>
                 <div class="mdc-card__action-icons">
-                  <mdc-icon-button @click="showVehicleCreateUpdateForm(o)">
+                  <mdc-icon-button @click="showVehicleProperties(o)">
                     edit
                   </mdc-icon-button>
-                  <mdc-icon-button @click="$router.push(`/vehicle/${o.id}/delete`)">
+                  <mdc-icon-button @click="showVehicleDelete(o)">
                     delete
                   </mdc-icon-button>
                 </div>
@@ -48,11 +45,11 @@
           </div>
           <div class="
             mdc-layout-grid__cell
-            mdc-layout-grid__cell--span-6
+            mdc-layout-grid__cell--span-12
           ">
             <mdc-button
               icon="add"
-              @click="showVehicleCreateUpdateForm()"
+              @click="showVehicleProperties()"
               outlined
             >
               Добавить автомобиль
@@ -76,18 +73,23 @@
 
     <transition name="fade">
       <overlay
-        v-if="vehicle"
-        @close="vehicle = null"
-        title="Добавление авто"
+        v-if="vehicleToSave"
+        @close="vehicleToSave = null"
+        :title="vehicleToSave.id ? 'Редактирование авто' : 'Добавление авто'"
       >
-        <vehicle-properties
-          :vehicle="vehicle"
-          @create="vehicle = null"
-          @update="vehicle = null"
-        />
+        <vehicle-properties v-model="vehicleToSave"/>
       </overlay>
     </transition>
 
+    <transition name="fade">
+      <overlay
+        v-if="vehicleToDelete"
+        @close="vehicleToDelete = null"
+        title="Удаление авто"
+      >
+        <vehicle-delete v-model="vehicleToDelete"/>
+      </overlay>
+    </transition>
   </div>
 </template>
 
@@ -98,23 +100,25 @@
   import MdcButton from '@/components/mdc/button'
   import MdcIconButton from '@/components/mdc/icon-button'
 
-  // Vehicle create / update
   import VehicleModel from '@/libs/models/vehicle'
   import VehicleProperties from '@/components/vehicle/properties'
+  import VehicleDelete from '@/components/vehicle/delete'
 
   export default {
     components: {
       MdcButton,
       MdcIconButton,
       Overlay,
-      VehicleProperties
+      VehicleProperties,
+      VehicleDelete
     },
 
     name: 'Profile',
 
     data () {
       return {
-        vehicle: undefined,
+        vehicleToSave: undefined,
+        vehicleToDelete: undefined,
         loading: false
       }
     },
@@ -124,13 +128,17 @@
     },
 
     methods: {
-      showVehicleCreateUpdateForm (vehicle) {
+      showVehicleProperties (vehicle) {
         if (vehicle) {
-          this.vehicle = vehicle
+          this.vehicleToSave = vehicle
         } else {
-          this.vehicle = new VehicleModel()
-          // this.vehicle.setRandomPhoto()
+          this.vehicleToSave = new VehicleModel()
+          // this.vehicleToSave.setRandomPhoto()
         }
+      },
+
+      showVehicleDelete (vehicle) {
+        this.vehicleToDelete = vehicle
       },
 
       async doLogout () {

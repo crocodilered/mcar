@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <aside ref="drawer" class="mdc-drawer mdc-drawer--dismissible">
+    <aside ref="drawer" class="mdc-drawer mdc-drawer--modal">
       <div class="mdc-drawer__header">
         <h3 class="mdc-drawer__title">Авто-заметки</h3>
         <h6 class="mdc-drawer__subtitle" v-if="user">{{ user.email }}</h6>
@@ -42,15 +42,7 @@
       </header>
       <main ref="content" class="main-content">
         <div class="mdc-top-app-bar--fixed-adjust">
-          <div class="vehicle-manage-tabs">
-            <div class="mdc-layout-grid">
-              <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
-                  <vehicle-tabs v-if="vehicleManageTab"/>
-                </div>
-              </div>
-            </div>
-          </div>
+          <vehicle-tabs v-if="vehicleManageTab"/>
           <router-view/>
         </div>
       </main>
@@ -124,4 +116,5 @@
   @import "~@material/list/mdc-list.scss";
   
   @import "@/assets/app.scss";
+  @import "@/assets/grid.scss";
 </style>

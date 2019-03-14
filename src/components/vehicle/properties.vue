@@ -3,7 +3,7 @@
     <mdc-textfield
       label="Марка / модель"
       type="text"
-      v-model="vehicleTitle"
+      v-model="vehicle.title"
       placeholder="Mercedes Benz S600, к примеру"
       required
     />
@@ -62,7 +62,7 @@
 
   const data = function () {
     return {
-      vehicleTitle: this.vehicle.title || '',
+      vehicle: this.value,
       photoUrl: null,
       photoFile: null,
       loading: false
@@ -70,7 +70,7 @@
   }
 
   const watch = {
-    vehicle: function () {
+    value: function () {
       this.photoUrl = null
     }
   }
@@ -162,41 +162,35 @@
     async saveVehicle () {
       if (this.vehicle) {
         const userUid = this.$store.state.user.uid
-        const collRef = firestore.collection('users').doc(userUid).collection('vehicles')
-        let emit, appendixData, options
+        const collRef = firestore
+          .collection('users')
+          .doc(userUid)
+          .collection('vehicles')
+
+        let appendixData, options
 
         this.loading = true
 
         if (this.vehicle.id) {
-          emit = 'update'
           appendixData = { updated: new Date() }
           options = { merge: true }
         } else {
-          emit = 'create'
           appendixData = { updated: new Date(), created: new Date() }
           let vehicleRef = collRef.doc()
           this.vehicle.id = vehicleRef.id
         }
 
-        await this.savePhoto()
-
-        this.vehicle.title = this.vehicleTitle
+        // await this.savePhoto()
 
         collRef.doc(this.vehicle.id)
           .set({ ...this.vehicle.json, ...appendixData }, options)
           .then(() => {
-            this.$emit(emit)
             // Update local cache
             const vehicles = this.$store.state.vehicles || {}
             vehicles[this.vehicle.id] = this.vehicle
             this.$store.commit('setVehicles', vehicles)
-            this.$store.dispatch('selectCurrentVehicle', this.vehicle.id)
-          })
-          .catch(() => {
-            // Show error
-          })
-          .finally(() => {
             this.loading = false
+            this.$emit('input', null)
           })
       }
     }
@@ -205,7 +199,7 @@
   export default {
     name: 'VehicleProperties',
     components: { MdcSubmit, MdcTextfield },
-    props: ['vehicle'],
+    props: ['value'],
     computed,
     data,
     watch,

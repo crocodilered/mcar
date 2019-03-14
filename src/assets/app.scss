@@ -50,46 +50,12 @@ p {
 .mdc-drawer-app-content {
   height: 100%;
 }
-.vehicle-manage-tabs {
-  background-color: $mdc-theme-primary-light;
-  .mdc-layout-grid {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-}
 
-@media (max-width: $width-sm) {
-  .vehicle-manage-tabs .mdc-layout-grid {
-    padding: 0;
-  }
-}
 @media (min-width: $width-md) {
   .app-fab--absolute {
     bottom: 1.5rem;
     right: 1.5rem;
   }
-}
-
-@media (max-width: $width-sm) {
-  .mdc-layout-grid__cell:first-child {
-    grid-column-start: 1;
-  }
-}
-
-@media (min-width: $width-sm) and (max-width: $width-md) {
-  .mdc-layout-grid__cell:first-child {
-    grid-column-start: 2;
-  }
-}
-
-@media (min-width: $width-md) {
-  .mdc-layout-grid__cell:first-child {
-    grid-column-start: 4;
-  }
-}
-
-.mdc-layout-grid__inner .mdc-layout-grid__inner .mdc-layout-grid__cell:first-child {
-  grid-column-start: 1;
 }
 
 /* MDC TABLE */

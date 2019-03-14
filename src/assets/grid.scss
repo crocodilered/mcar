@@ -1,0 +1,23 @@
+.mdc-layout-grid__cell--main {
+  @include mdc-layout-grid-cell(desktop, 4, 0);
+  @include mdc-layout-grid-cell(tablet, 4, 0);
+  @include mdc-layout-grid-cell(phone, 4, 0);
+}
+
+@media (max-width: $width-sm) {
+  .mdc-layout-grid__cell--main {
+    grid-column-start: 1;
+  }
+}
+
+@media (min-width: $width-sm) and (max-width: $width-md) {
+  .mdc-layout-grid__cell--main {
+    grid-column-start: 3;
+  }
+}
+
+@media (min-width: $width-md) {
+  .mdc-layout-grid__cell--main {
+    grid-column-start: 5;
+  }
+}

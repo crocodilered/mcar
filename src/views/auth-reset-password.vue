@@ -1,7 +1,7 @@
 <template>
   <div class="mdc-layout-grid">
     <div class="mdc-layout-grid__inner">
-      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+      <div class="mdc-layout-grid__cell--main">
         <h1>Восстановление пароля</h1>
         <p v-if="emailSent">
           Инструкции для восстановления пароля высланы на почту {{ email.value }}, проверяйте ящик.

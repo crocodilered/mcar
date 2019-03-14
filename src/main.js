@@ -2,10 +2,10 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 
-import App from './app'
-import router from './router'
-import store from './store'
-import { auth, firestore } from './config'
+import App from '@/app'
+import router from '@/router'
+import store from '@/store'
+import { auth, firestore } from '@/config'
 import VehicleModel from '@/libs/models/vehicle'
 
 Vue.config.productionTip = false
