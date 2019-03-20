@@ -1,8 +1,12 @@
 <template>
   <div id="app">
-    <aside ref="drawer" class="mdc-drawer mdc-drawer--modal">
+    <aside
+      v-if="isAuthenticated"
+      ref="drawer"
+      class="mdc-drawer mdc-drawer--modal"
+    >
       <div class="mdc-drawer__header">
-        <h3 class="mdc-drawer__title">Авто-заметки</h3>
+        <h3 class="mdc-drawer__title">Заметки об автомобиле</h3>
         <h6 class="mdc-drawer__subtitle" v-if="user">{{ user.email }}</h6>
       </div>
       <div class="mdc-drawer__content">
@@ -35,7 +39,13 @@
       <header ref="appbar" class="mdc-top-app-bar app-bar">
         <div class="mdc-top-app-bar__row">
           <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-            <a href="#" class="material-icons mdc-top-app-bar__navigation-icon">menu</a>
+            <a
+              v-if="isAuthenticated"
+              href="#"
+              class="material-icons mdc-top-app-bar__navigation-icon"
+            >
+              menu
+            </a>
             <span class="mdc-top-app-bar__title">{{ title }}</span>
           </section>
         </div>
@@ -69,7 +79,7 @@
     title () {
       return this.currentVehicle
         ? this.currentVehicle.title.slice()
-        : 'Авто-заметки'
+        : 'Заметки об автомобиле'
     }
   }
 
@@ -91,17 +101,20 @@
     computed,
 
     mounted () {
-      this.drawer = new MDCDrawer(this.$refs.drawer)
       this.topAppBar = new MDCTopAppBar(this.$refs.appbar)
       this.topAppBar.setScrollTarget(this.$refs.content)
-      this.topAppBar.listen('MDCTopAppBar:nav', () => {
-        this.drawer.open = !this.drawer.open
-      })
+      
+      if (this.$refs.drawer) {
+        this.drawer = new MDCDrawer(this.$refs.drawer)
+        this.topAppBar.listen('MDCTopAppBar:nav', () => {
+          this.drawer.open = !this.drawer.open
+        })
+      }
     },
 
     destroyed () {
-      this.drawer.destroy()
       this.topAppBar.destroy()
+      if (this.drawer) this.drawer.destroy()
     }
   }
 </script>
